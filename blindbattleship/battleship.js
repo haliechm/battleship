@@ -8,6 +8,9 @@ var missAudio;
 var sunkAudio;
 var missionCompleteAudio;
 
+var opShipsHit = 0;
+var opMaxSquares = 49;
+
 
 let model = {
     boardSize: 7,
@@ -22,7 +25,7 @@ let model = {
     ],
     
    
-
+// add start over option at end of game
 
 
     fire: function(guess) {
@@ -56,6 +59,7 @@ let model = {
                 return true;
             }
         }
+        // if miss it
         hitAudio.pause();
         missAudio.currentTime = 0;
         missAudio.play();
@@ -162,6 +166,7 @@ let controller = {
     processGuessBlind: function(guess) {
         this.guesses++;
         let hit = model.fire(guess);
+        
         if (hit && model.shipsSunk == model.numShips) {
             view.displayMessage("You sank all my battleships in " + this.guesses + " guesses");
             hitAudio.pause();
@@ -170,7 +175,62 @@ let controller = {
             missionCompleteAudio.play();
 //            say("Congratulations, you sunk all my battleships!");
         }
+        talk("opponent's turn.");
+        opponentsTurn();
+        // say it is now your opponents turn
+        // hit enter to continue
+//        talk("Opponent's turn");
+//        
+//        opponentsTurn();
     }
+}
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function opponentsTurn() {
+    var oGuess = Math.floor(getRandomArbitrary(1, 5));
+    opMaxSquares = opMaxSquares - 10;
+    var missed = true;
+    
+    // say opponents turn
+    
+    if (oGuess == 4) {
+        opShipsHit = opShipsHit + 1;
+        // make noise
+//        missAudio.pause();
+//        sunkAudio.pause();
+//        hitAudio.pause();
+        hitAudio.currentTime = 0;
+        hitAudio.play();
+        missed = false;
+       
+    } else {
+        // make miss noise
+//        sunkAudio.pause();
+//        hitAudio.pause();
+//        missAudio.pause();
+        missAudio.currentTime = 0;
+        missAudio.play();
+    }
+    
+    if (opShipsHit == 9) {
+        //opponent wins and game is over
+        // say opponent wins, game over
+        talk("Opponent has sunk your last ship. Game Over.")
+//         gameOver();
+    }
+    
+    if (missed) {
+        talk("Opponent has missed. Make your next move now.");
+    } else {
+        talk("Opponent has hit your ship. Time to retaliate..")
+    }
+    // say hit enter to continue to your turn
+    
+    return;
 }
 
 
@@ -198,6 +258,9 @@ let controller = {
 //    return null;
 //}
 
+function gameOver() {
+    
+}
 
 // event handlers
 
@@ -303,6 +366,8 @@ function logKey(e) {
         }
     }
     
+    // need to fix that can bypass opponents turn by not hitting enter
+    
     // right arrow
      if (e.keyCode == 39) {
 //          audio.play();
@@ -369,6 +434,15 @@ function logKey(e) {
           handleFireBlindVersion();
           return false;
     }
+    
+    // enter goes to opponents turn
+//    if (e.keyCode == 13) {
+//        opponentsTurn();
+//    }
+    
+    
+    
+    // shift goes to your turn
 
 }
 
@@ -418,6 +492,13 @@ function say(text) {
 //    msg.voice = voices[1];
 //  msg.voice = voices[4];
   window.speechSynthesis.speak(msg);
+}
+
+function talk(text) {
+     var msg = new SpeechSynthesisUtterance(text);
+    msg.rate = 2;
+    window.speechSynthesis.speak(msg);
+    
 }
 
 // https://www.w3schools.com/graphics/tryit.asp?filename=trygame_sound
