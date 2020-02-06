@@ -175,8 +175,17 @@ let controller = {
             missionCompleteAudio.play();
 //            say("Congratulations, you sunk all my battleships!");
         }
-        talk("opponent's turn.");
-        opponentsTurn();
+        
+        // 2 second delay
+        var delayInMilliseconds = 2000; //2 second
+
+        setTimeout(function() {
+            //your code to be executed after 1 second
+            talk("opponent's turn.");
+            opponentsTurn();
+        }, delayInMilliseconds);
+//        talk("opponent's turn.");
+//        opponentsTurn();
         // say it is now your opponents turn
         // hit enter to continue
 //        talk("Opponent's turn");
