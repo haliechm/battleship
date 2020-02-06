@@ -11,6 +11,11 @@ var missionCompleteAudio;
 var opShipsHit = 0;
 var opMaxSquares = 49;
 
+var won = false;
+
+//var delayInMilliseconds = 2000;
+
+// figure out way to make not beable to click when it's opponent's turn
 
 let model = {
     boardSize: 7,
@@ -35,12 +40,19 @@ let model = {
 
 
             if (ship.hits[index] === "hit") {
+                // can put sound here for if hitting ship already there
                 view.displayMessage("Oops, you already hit that location!");
                 return true;
             } else if (index >= 0) {
                 missAudio.pause();
-                hitAudio.currentTime = 0;
-                hitAudio.play();
+//                delayInMilliseconds = 1000;
+//                 setTimeout(function() {
+//            //your code to be executed after 1 second
+                    hitAudio.currentTime = 0;
+                    hitAudio.play();
+//                }, delayInMilliseconds);
+//                hitAudio.currentTime = 0;
+//                hitAudio.play();
                 ship.hits[index] = "hit";
                 view.displayHit(guess);
                 view.displayMessage("HIT!");
@@ -52,8 +64,17 @@ let model = {
 //                    say("You sunk my battleship!");
                     missAudio.pause();
 //                    hitAudio.pause();
+                    
+                    
+                    // probably change this to be less time
+//                setTimeout(function() {
+//            //your code to be executed after 1 second
                     sunkAudio.currentTime = 0;
                     sunkAudio.play();
+//                }, delayInMilliseconds);
+                    
+//                    sunkAudio.currentTime = 0;
+//                    sunkAudio.play();
                     this.shipsSunk++;
                 }
                 return true;
@@ -61,8 +82,15 @@ let model = {
         }
         // if miss it
         hitAudio.pause();
-        missAudio.currentTime = 0;
-        missAudio.play();
+        
+//        setTimeout(function() {
+//            //your code to be executed after 1 second
+            missAudio.currentTime = 0;
+            missAudio.play(); 
+//        }, delayInMilliseconds);
+        
+//        missAudio.currentTime = 0;
+//        missAudio.play();
         view.displayMiss(guess);
         view.displayMessage("You missed.");
         return false;
@@ -149,6 +177,8 @@ let view = {
 
 };
 
+
+
 let controller = {
     guesses: 0,
 
@@ -169,21 +199,31 @@ let controller = {
         
         if (hit && model.shipsSunk == model.numShips) {
             view.displayMessage("You sank all my battleships in " + this.guesses + " guesses");
+            won = true;
             hitAudio.pause();
             missAudio.pause();
             sunkAudio.pause();
             missionCompleteAudio.play();
+            var delayInMilliseconds = 4000;
+        setTimeout(function() {
+            //your code to be executed after 1 second
+             document.location.reload();
+        clearInterval(interval); 
+       
+        }, delayInMilliseconds);
 //            say("Congratulations, you sunk all my battleships!");
         }
         
         // 2 second delay
-        var delayInMilliseconds = 2000; //2 second
+        var delayInMilliseconds = 900; //2 second
 
+        if(!won) {
         setTimeout(function() {
             //your code to be executed after 1 second
             talk("opponent's turn.");
             opponentsTurn();
         }, delayInMilliseconds);
+        }
 //        talk("opponent's turn.");
 //        opponentsTurn();
         // say it is now your opponents turn
@@ -200,43 +240,71 @@ function getRandomArbitrary(min, max) {
 }
 
 function opponentsTurn() {
-    var oGuess = Math.floor(getRandomArbitrary(1, 5));
+    var delayInMilliseconds = 1700; //2 second
+
+       
+    var oGuess = Math.floor(getRandomArbitrary(1, 4));
     opMaxSquares = opMaxSquares - 10;
     var missed = true;
     
     // say opponents turn
     
-    if (oGuess == 4) {
+    if (oGuess == 1) {
         opShipsHit = opShipsHit + 1;
         // make noise
 //        missAudio.pause();
 //        sunkAudio.pause();
 //        hitAudio.pause();
-        hitAudio.currentTime = 0;
+        
+       
+        
+         setTimeout(function() {
+            //your code to be executed after 1 second
+            
+       hitAudio.currentTime = 0;
         hitAudio.play();
         missed = false;
+        }, delayInMilliseconds);
        
     } else {
         // make miss noise
 //        sunkAudio.pause();
 //        hitAudio.pause();
 //        missAudio.pause();
-        missAudio.currentTime = 0;
+          setTimeout(function() {
+            //your code to be executed after 1 second
+              missAudio.currentTime = 0;
         missAudio.play();
+       
+        }, delayInMilliseconds);
+       
     }
     
     if (opShipsHit == 9) {
         //opponent wins and game is over
         // say opponent wins, game over
         talk("Opponent has sunk your last ship. Game Over.")
-//         gameOver();
+        delayInMilliseconds = 4000;
+        setTimeout(function() {
+            //your code to be executed after 1 second
+             document.location.reload();
+        clearInterval(interval); 
+       
+        }, delayInMilliseconds);
+        
     }
     
-    if (missed) {
-        talk("Opponent has missed. Make your next move now.");
-    } else {
-        talk("Opponent has hit your ship. Time to retaliate..")
-    }
+    delayInMilliseconds = 2000;
+     setTimeout(function() {
+            //your code to be executed after 1 second
+//             if (missed) {
+////        talk("Opponent has missed. Make your next move now.");
+//    } else {
+////        talk("Opponent has hit your ship. Time to retaliate..")
+//    }
+         talk("Your turn to fire");
+        }, delayInMilliseconds);
+  
     // say hit enter to continue to your turn
     
     return;
@@ -460,13 +528,14 @@ function logKey(e) {
 window.onload = init;
 
 // used this From G. Bishop's AudioRunner example
+
 function say(text) {
 //    voices = this.getVoices();
     
     var letter;
   switch (currentRow) {
     case 0:
-      letter = "Ay";
+      letter = "A";
       break;
      case 1:
       letter = "B";
@@ -494,18 +563,21 @@ function say(text) {
 //        msg.voice = voices[1];
         
         msg.volume = 10;
-        msg.rate = 2;
+        msg.rate = 1.5;
 //        msg.pitch = 0.8;
 //        msg.lang = 'en-US';
 //        msg.voiceURI = "native";
 //    msg.voice = voices[1];
 //  msg.voice = voices[4];
+    
+   
+    
   window.speechSynthesis.speak(msg);
 }
 
 function talk(text) {
      var msg = new SpeechSynthesisUtterance(text);
-    msg.rate = 2;
+    msg.rate = 1.5;
     window.speechSynthesis.speak(msg);
     
 }
@@ -548,12 +620,12 @@ function init() {
 //    cell.setAttribute("newVal", "my_attrib");
     
 //    cell.setAttribute("class", "highlight");
-    
+     
     cell.setAttribute("style", "border: 1.5px solid yellow;");
     
     
     audio = new Audio('sounds/open.mp3');
-    audio.volume = .2;
+    audio.volume = .1;
     hitAudio = new Audio('sounds/hit.mp3');
     hitAudio.volume = .4;
     missAudio = new Audio('sounds/missed.mp3');
