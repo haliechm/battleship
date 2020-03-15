@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Battleship</title>
+<!--    <script src="//cdn.jsdelivr.net/npm/phaser@3.19.0/dist/phaser.min.js"></script>-->
+<!--    <script type="module" src="src/app.js"></script>-->
+<!--    <link href="style.css" rel="stylesheet" type="text/css" />-->
+ <style>
+     * {
+         background-color: black;
+         color: white;
+         font-size: 120%;
+     }
+     
+     h1 {
+         font-size: 220%;
+     }
+     
+     p {
+         font-size: 80%;
+     }
+     
+     label {
+         font-size: 60%;
+     }
+     
+     button:hover {
+         background-color: white;
+         color: black;
+     }
+     
+     button:hover, input:hover {
+         cursor: pointer;
+     }
+     
+
+     
+/*
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+*/
+      
+</style>
+  </head>
+  <body class="settings">
+<!--    <div id="play" class="row">-->
+<!--      <button id="setup" title="settings"><img src="assets/gear.png" /></button>-->
+<!--      <button id="left" class="col choice">&larr;</button>-->
+<!--      <div id="game" class="col"></div>-->
+<!--      <button id="right" class="col choice">&rarr;</button>-->
+<!--    </div>-->
+    <div id="settings">
+     
+   
+      <h1>Battleship</h1>
+     
+      
+      <p>
+        Eliminate all of the enemy's battleships using only a limited number of missiles.
+      </p>
+      <p>There are three ships (each 3 squares long) to sink. Difficulty level determines the number of missiles given at the beginning of the game. The following is a picture of a winning board:</p>
+     
+      
+     
+     
+      <img src="images/winning_board.png" alt="Picture of a winning game board. Contains three ships each with a length of 3 squares." class = "center">
+   
+     
+      <p>Select difficultly of game:</p>
+      
+      <div>
+        <input type="radio" id="auto" name="mode" value="auto" checked />
+        <label for="auto"
+          ><b>Easy</b> 40-49 Missiles</label
+        >
+      </div>
+      <div>
+        <input type="radio" id="one" name="mode" value="one" />
+        <label for="one"
+          ><b>Medium</b> 25-39 Missiles</label
+        >
+      </div>
+      <div>
+        <input type="radio" id="full" name="mode" value="full" />
+        <label for="full"
+          ><b>Difficult</b> 15-24 Missiles</label
+        >
+      </div>
+      
+       <div>
+        <input type="radio" id="full" name="mode" value="full" />
+        <label for="full"
+          ><b>Extremely Difficult</b> 10-14 Missiles</label
+        >
+      </div>
+      
+      <div>
+        <input type="radio" id="full" name="mode" value="full" />
+        <label for="full"
+          ><b>Mission (nearly) Impossible</b> 9 Missiles</label
+        >
+      </div>
+     
+ 
+
+      <p>
+        The player controls the choices directly using the buttons or arrow keys/space bar
+      </p>
+
+<!--
+      <div>
+        <input type="checkbox" id="sound" />
+        <label for="sound">Enable sound</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="asteroids" />
+        <label for="asteroids"
+          >Include occasional asteroids which must be avoided</label
+        >
+      </div>
+-->
+
+      <p>
+        Use the gear icon in the upper left to come back here from the game
+      </p>
+      <a href = "index.html"><button id="playButton">Start New Game</button></a>
+    </div>
+  </body>
+</html>

@@ -12,6 +12,7 @@
         }
         body {
             background-color: black;
+             --available-height: calc(100vh);
         }
         h2{
             color: blue;
@@ -22,8 +23,10 @@
             position: relative;
             left: 1px;
             width: 1024px;
-            height: 863px;
+            height: 820px;
+            /*863*/
             margin: auto;
+/*            background: url("images/board%20.jpg") no-repeat;*/
             background: url("images/board%20.jpg") no-repeat;
         }
 
@@ -32,6 +35,14 @@
             top: 0px;
             left: 0px;
             color: rgb(83, 175, 19);
+            font-size: 25px;
+        }
+        div#messageArea2 {
+            position: absolute;
+            top: 0px;
+            left: 65%;
+            color: rgb(83, 175, 19);
+            font-size: 25px;
         }
         .hit {
             background: url("images/ship.png") no-repeat center center;
@@ -61,10 +72,90 @@
             border-color: rgb(83, 175, 19);
             font-size: 0.75em;
         }
+        
+        
+        
+        button.choice {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          font-size: 2vw;
+/*
+            background-color: black;
+            border: 2px solid blue;
+*/
+            
+            background-color: black;
+            border: black;
+            color: #FFFF66;
+       
+        }
+        
+        button.selected {
+  background-color: pink;
+            border: 1px solid green;
+}
+        
+        .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+        .col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+            
+}
+        
+        #left:hover, #up:hover, #right:hover, #down:hover {
+            background-color: #1B1E23;
+        }
+
+        
+        #setup {
+            height: 0%;
+            width: 0%;
+        }
+        
+        img {
+            height: 30px;
+            color: black;
+            background-color: black;
+            
+        }
+        
+        button#setup {
+            background-color: black;
+            border: black;
+        }
+        
+        button:hover {
+            cursor: pointer;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </style>
 </head>
 <body>
-    
+   <a href="settings.html"><button id="setup" title="settings"><img src="images/gear.png" /></button></a>
+    <div id="play" class="row rowup">
+    <button id="up" class="col choice">&uarr;</button>
+    </div>
+     <div id="play" class="row rowleft">
+    <button id="left" class="col choice">&larr;</button>
+
+
+
 <div id="board">
     
     <div id="messageArea"></div>
@@ -98,13 +189,18 @@
             <td id="64"></td> <td id="65"></td> <td id="66"></td>
         </tr>
     </table>
-<!--
-    <form>
-        <input type="text" id="guessInput" placeholder="A0">
-        <input type="button" id="fireButton" value="Fire!">
-    </form>
--->
+   <div id="messageArea2"></div>
+
 </div>
+ 
+<button id="right" class="col choice">&rarr;</button>
+<div id="play" class="row rowdown">
+<button id="down" class="col choice">&darr;</button>
+         </div>
+    </div>
+    
+
+
 <script src="battleship.js">
 </script>
 </body>
