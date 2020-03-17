@@ -1,3 +1,6 @@
+//import { getDifficulty }from "./settingsJS.js";
+//var difficulty = getDifficulty();
+
 
 var currentRow = 0;
 var currentCol = 0;
@@ -18,7 +21,7 @@ var won = false;
 
 var numHits = 0;
 var numTries = 0;
-var remainingTries = 22;
+var remainingTries = 20;
 
 
 let model = {
@@ -193,7 +196,9 @@ let controller = {
         if(!won) {
         setTimeout(function() {
              if (remainingTries <= 0) {
-            losePopUp();
+            showMissedShipsWhenLost();
+             alert("Mission Failed: You ran out of missiles. Try again.")
+             document.location.reload();
         }
         }, delayInMilliseconds);
         }
@@ -203,6 +208,13 @@ let controller = {
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 
@@ -221,6 +233,24 @@ function handleFireBlindVersion() {
     var guess = "" + currentRow + currentCol + "";
     controller.processGuessBlind(guess);
 }
+
+//function showMissedShipsWhenLost() {
+//    for (int i=0; i<this.numShips; i++) {
+//        let ship = this.ships[i];
+//        
+//        for (int x=0; x<8; x++) {
+//            for (int y=0; y<8; y++) {
+//                var guess = "" + x + y + "";
+//                var index = ship.locations.indexOf(guess);
+//                if (ships.hits[index] != "hit") {
+//                    view.displayHit(guess);
+//                }
+//            }
+//        }
+//        
+//     
+//    }
+//}
 
 function handleKeyPress(e) {
     let fireButton = document.getElementById("fireButton");
@@ -369,10 +399,6 @@ function logKey(e) {
     
 }
 
-function losePopUp() {
-    alert("Mission Failed: You ran out of missiles. Try again.")
-    document.location.reload();
-}
 
 
 
@@ -631,6 +657,36 @@ function init() {
     b2Audio = new Audio('sounds/B2.mp3')
     
     view.displayMessage("Number of missiles used: " + numTries);
+    view.displayMessage2("Number of missiles remaining: " + remainingTries);
+    
+    
+//    if (document.getElementById("easy").checked) {
+//        console.log("easy!");
+//    }
+    
+    
+    alert("DIFFICULTY: " + difficulty);
+    console.log("diff: " + difficulty);
+    
+    switch (difficulty) {
+        case "easy":
+            remainingTries = getRandomInt(40,50);
+            break;
+        case "medium":
+            remainingTries = getRandomInt(25,40);
+            break;
+        case "difficult":
+            remainingTries = getRandomInt(15,25);
+            break;
+        case "exdifficult":
+            remainingTries = getRandomInt(10,15);
+            break;
+        case "missionimpossible":
+            remainingTries = 9
+            break;
+    }
+    
+    console.log(remainingTries + ":");
     view.displayMessage2("Number of missiles remaining: " + remainingTries);
 
     

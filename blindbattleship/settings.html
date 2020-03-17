@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Battleship</title>
+     <script src="settingsJS.js" type="text/javascript"></script>
+     <script src="battleship.js" type="text/javascript"></script>
+     
 <!--    <script src="//cdn.jsdelivr.net/npm/phaser@3.19.0/dist/phaser.min.js"></script>-->
 <!--    <script type="module" src="src/app.js"></script>-->
 <!--    <link href="style.css" rel="stylesheet" type="text/css" />-->
@@ -47,6 +50,14 @@
 </style>
   </head>
   <body class="settings">
+  
+<!--
+  What's your name? <input  id="insertedName" />
+		<button onclick="functionName(insertedName.value)">Say hello</button>
+-->
+<!--  <button onclick="setDifficulty()">Click me</button>-->
+
+ 
 <!--    <div id="play" class="row">-->
 <!--      <button id="setup" title="settings"><img src="assets/gear.png" /></button>-->
 <!--      <button id="left" class="col choice">&larr;</button>-->
@@ -73,33 +84,33 @@
       <p>Select difficultly of game:</p>
       
       <div>
-        <input type="radio" id="auto" name="mode" value="auto" checked />
+        <input type="radio" id="easy" name="mode" value="auto" onclick="setDifficulty()" />
         <label for="auto"
           ><b>Easy</b> 40-49 Missiles</label
         >
       </div>
       <div>
-        <input type="radio" id="one" name="mode" value="one" />
+        <input type="radio" id="medium" name="mode" value="one" onclick="setDifficulty()"/>
         <label for="one"
           ><b>Medium</b> 25-39 Missiles</label
         >
       </div>
       <div>
-        <input type="radio" id="full" name="mode" value="full" />
+        <input type="radio" id="difficult" name="mode" value="full" onclick="setDifficulty()"/>
         <label for="full"
           ><b>Difficult</b> 15-24 Missiles</label
         >
       </div>
       
        <div>
-        <input type="radio" id="full" name="mode" value="full" />
+        <input type="radio" id="exdifficult" name="mode" value="full" onclick="setDifficulty()"/>
         <label for="full"
           ><b>Extremely Difficult</b> 10-14 Missiles</label
         >
       </div>
       
       <div>
-        <input type="radio" id="full" name="mode" value="full" />
+        <input type="radio" id="missionimpossible" name="mode" value="full" onclick="setDifficulty()" checked/>
         <label for="full"
           ><b>Mission (nearly) Impossible</b> 9 Missiles</label
         >
@@ -108,7 +119,7 @@
  
 
       <p>
-        The player controls the choices directly using the buttons or arrow keys/space bar
+        The player controls the choices directly using the buttons or arrow keys/enter
       </p>
 
 <!--
@@ -130,5 +141,6 @@
       </p>
       <a href = "index.html"><button id="playButton">Start New Game</button></a>
     </div>
+   
   </body>
 </html>
