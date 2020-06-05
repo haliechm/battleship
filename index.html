@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Battleship</title>
+    <link rel="icon"
+          type="image/png"
+          href="images/ship.png">
+    <style>
+        p {
+            color: white;
+        }
+        body {
+            background-color: black;
+             --available-height: calc(100vh);
+        }
+        h2{
+            color: blue;
+            text-align: center;
+            
+        }
+        div#board {
+            position: relative;
+            left: 1px;
+            width: 1024px;
+            height: 820px;
+            /*863*/
+            margin: auto;
+/*            background: url("images/board%20.jpg") no-repeat;*/
+            background: url("images/board%20.jpg") no-repeat;
+        }
+
+        div#messageArea {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            color: rgb(83, 175, 19);
+            font-size: 25px;
+        }
+        div#messageArea2 {
+            position: absolute;
+            top: 0px;
+            left: 65%;
+            color: rgb(83, 175, 19);
+            font-size: 25px;
+        }
+        .hit {
+            background: url("images/ship.png") no-repeat center center;
+        }
+        .miss {
+            background: url("images/miss.png") no-repeat center center;
+        }
+        table {
+            border-spacing: 0px;
+            position: absolute;
+            left: 173px;
+            top: 98px;
+        }
+        td {
+            width: 94px;
+            height: 94px;
+        }
+        form {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            padding: 15px;
+            background-color: #084472;
+        }
+        form input {
+            background-color: rgb(152, 207, 113);
+            border-color: rgb(83, 175, 19);
+            font-size: 0.75em;
+        }
+        
+        
+        
+        button.choice {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          font-size: 2vw;
+/*
+            background-color: black;
+            border: 2px solid blue;
+*/
+            
+            background-color: black;
+            border: black;
+            color: #FFFF66;
+       
+        }
+        
+        button.selected {
+  background-color: pink;
+            border: 1px solid green;
+}
+        
+        .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+        .col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+            
+}
+        
+        #left:hover, #up:hover, #right:hover, #down:hover {
+            background-color: #1B1E23;
+        }
+
+        
+        #setup {
+            height: 0%;
+            width: 0%;
+        }
+        
+        img {
+            height: 30px;
+            color: black;
+            background-color: black;
+            
+        }
+        
+        button#setup {
+            background-color: black;
+            border: black;
+        }
+        
+        button:hover {
+            cursor: pointer;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </style>
+</head>
+<body>
+   <a href="settings.html"><button id="setup" title="settings"><img src="images/gear.png" /></button></a>
+    <div id="play" class="row rowup">
+    <button id="up" class="col choice">&uarr;</button>
+    </div>
+     <div id="play" class="row rowleft">
+    <button id="left" class="col choice">&larr;</button>
+
+
+
+<div id="board">
+    
+    <div id="messageArea"></div>
+    <table>
+        <tr>
+            <td id="00"></td> <td id="01"></td> <td id="02"></td> <td id="03"></td>
+            <td id="04"></td> <td id="05"></td> <td id="06"></td>
+        </tr>
+        <tr>
+            <td id="10"></td> <td id="11"></td> <td id="12"></td> <td id="13"></td>
+            <td id="14"></td> <td id="15"></td> <td id="16"></td>
+        </tr>
+        <tr>
+            <td id="20"></td> <td id="21"></td> <td id="22"></td> <td id="23"></td>
+            <td id="24"></td> <td id="25"></td> <td id="26"></td>
+        </tr>
+        <tr>
+            <td id="30"></td> <td id="31"></td> <td id="32"></td> <td id="33"></td>
+            <td id="34"></td> <td id="35"></td> <td id="36"></td>
+        </tr>
+        <tr>
+            <td id="40"></td> <td id="41"></td> <td id="42"></td> <td id="43"></td>
+            <td id="44"></td> <td id="45"></td> <td id="46"></td>
+        </tr>
+        <tr>
+            <td id="50"></td> <td id="51"></td> <td id="52"></td> <td id="53"></td>
+            <td id="54"></td> <td id="55"></td> <td id="56"></td>
+        </tr>
+        <tr>
+            <td id="60"></td> <td id="61"></td> <td id="62"></td> <td id="63"></td>
+            <td id="64"></td> <td id="65"></td> <td id="66"></td>
+        </tr>
+    </table>
+   <div id="messageArea2"></div>
+
+</div>
+ 
+<button id="right" class="col choice">&rarr;</button>
+<div id="play" class="row rowdown">
+<button id="down" class="col choice">&darr;</button>
+         </div>
+    </div>
+    
+
+
+<!--<script src="battleship.js" type="module"></script>-->
+     <script src="settingsJS.js" type="text/javascript"></script>
+     <script src="battleship.js" type="text/javascript"></script>
+
+</body>
+</html>
